@@ -5,7 +5,7 @@ import './Main.css';
 
 import api from '../services/api';
 
-import logo from '../assets/logo.svg';
+import logo from '../assets/logo.png';
 import dislike from '../assets/dislike.svg';
 import like from '../assets/like.svg';
 import itsamatch from '../assets/itsamatch.png';

@@ -3,7 +3,7 @@ import './Login.css';
 
 import api from '../services/api';
 
-import logo from '../assets/logo.svg';
+import logo from '../assets/logo.png';
 
 export default function Login({ history }) { //export exporta assim q ele for renderizado
     const [username, setUsername] = useState('');
