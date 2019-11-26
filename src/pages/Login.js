@@ -5,6 +5,8 @@ import api from '../services/api';
 
 import logo from '../assets/logo.png';
 
+import Menu from '../components/menu';
+
 export default function Login({ history }) { //export exporta assim q ele for renderizado
     const [username, setUsername] = useState('');
 
@@ -20,6 +22,8 @@ export default function Login({ history }) { //export exporta assim q ele for re
     }
 
     return (
+        <div>
+            <Menu />
         <div className="login-container">
             <form onSubmit={handleSubmit}>
                 <img src={logo} alt="Tindev"></img>
@@ -30,6 +34,7 @@ export default function Login({ history }) { //export exporta assim q ele for re
                 />
                 <button type="submit">Enviar</button>
             </form>
+        </div>
         </div>
     );
 }
