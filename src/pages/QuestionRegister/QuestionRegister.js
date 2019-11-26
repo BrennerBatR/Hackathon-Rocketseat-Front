@@ -1,9 +1,9 @@
 import React, {useState} from 'react';
-import './StudentRegister.css';
+import './QuestionRegister.css';
 
 // import api from '../services/api';
 
-import logo from '../assets/logo.png';
+import logo from '../../assets/logo.png';
 
 export default function Login({history}) {
     const [nome, setUsername] = useState('');
@@ -25,8 +25,15 @@ export default function Login({history}) {
         <div className="login-container">
             <div>
                 <img src={logo} alt="Tindev"></img>
-                <h2>Cadastro de Aluno</h2>
+                <h2>Cadastro de Pergunta</h2>
                 <form onSubmit={handleSubmit}>
+                    <label>
+                        Escolha a disciplina
+                        <select>
+                            <option value="laranja">Português</option>
+                            <option value="limao">Matemática</option>
+                        </select>
+                    </label>
                     <label>Nome
                         <input
                             // placeholder="Digite o nome do aluno"
@@ -43,7 +50,7 @@ export default function Login({history}) {
                     </label>
                     <label>Senha
                         <input id="email"
-                               // placeholder="Digite a senha do aluno"
+                            // placeholder="Digite a senha do aluno"
                                value={senha}
                                onChange={e => setSenha(e.target.value)}
                         /></label>
