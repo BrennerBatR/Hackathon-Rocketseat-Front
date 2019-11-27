@@ -164,7 +164,7 @@ export default function PersistentDrawerLeft() {
                         <ListItemIcon><AccountTreeIcon/></ListItemIcon>
                         <ListItemText primary='Matérias'/>
                     </ListItem>
-                    <ListItem button key='Perguntas' component={Link} to='/quest'>
+                    <ListItem button key='Perguntas' component={Link} to='/moduleSelect'>
                         <ListItemIcon><QuestionAnswerIcon/></ListItemIcon>
                         <ListItemText primary='Perguntas'/>
                     </ListItem>
