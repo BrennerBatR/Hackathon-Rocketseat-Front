@@ -38,12 +38,12 @@ export default class Quest extends Component {
         quest: quests[i]._id,
         correct: answer == quests[i].answer ? true : false
       };
-      const response = await api.post("/userQuests", answerData);
-      console.log(response.data);
-      if (quests[i + 1] != undefined) this.setState({ i: i + 1 });
-      else {
-        this.setState({ semQuest: true });
-      }
+      //const response = await api.post("/userQuests", answerData);
+      //console.log(response.data);
+     // if (quests[i + 1] != undefined) this.setState({ i: i + 1 });
+     // else {
+     //   this.setState({ semQuest: true });
+     // }
     } catch (e) {
       resp = e;
       document.getElementById("answer").innerHTML = resp;
@@ -55,7 +55,7 @@ export default class Quest extends Component {
     this.setState({ exp: event.target.value });
   }
   render() {
-    var { quests, i } = this.state;
+    var { quests, i, semQuest } = this.state;
     return (
       <div>
         <Menu />
@@ -89,7 +89,7 @@ export default class Quest extends Component {
               raio recebeu o valor do enunciado, pi consideramos um valor
               aproximado de 3.14 e a área é o resultado esperado na pergunta.
               Note que para imprimir o resultado final, escrevemos a variável
-              isolada na última linha da entrada. A função
+              isolada na última linha da entrada.
             </p>
           </div>
         </Container>
@@ -110,7 +110,7 @@ export default class Quest extends Component {
         </Container>
 
         <Container className="quest-container">
-          <div>
+          <div style={{ display: semQuest ? "none" : "block" }}>
             <h3>
               {quests.length > 0
                 ? `Questão ${i + 1}: ` + quests[i].question
@@ -127,6 +127,9 @@ export default class Quest extends Component {
               <button type="submit">Enviar</button>
             </form>
             <p className="answers" id="answer"></p>
+          </div>
+          <div style={{ display: !semQuest ? "none" : "block" }}>
+            Nenhuma pergunta para essa matéria disponível.
           </div>
         </Container>
       </div>
