@@ -13,7 +13,8 @@ export default class Quest extends Component {
     load: "",
     i: 0,
     user: "5ddd7a0ca0920b0017c58597",
-    questId: ""
+    questId: "",
+    semQuest: false
   };
 
   async componentDidMount() {
@@ -41,7 +42,7 @@ export default class Quest extends Component {
       console.log(response.data);
       if (quests[i + 1] != undefined) this.setState({ i: i + 1 });
       else {
-        alert("NAO");
+        this.setState({ semQuest: true });
       }
     } catch (e) {
       resp = e;
