@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./Quest.css";
 
 /* import api from "../../services/api";
@@ -12,6 +12,7 @@ export default function Login({ history }) {
   //export exporta assim q ele for renderizado
   const [exp, setExp] = useState("");
   const [displayExample, setdisplayExample] = useState("");
+
   /*   async function handleSubmit(e) {
 
     const response = await api.post("/devs", {
@@ -72,9 +73,13 @@ export default function Login({ history }) {
         <button
           id="sendQuest"
           style={{ textAlign: "center" }}
-          onClick={() => setdisplayExample("none")}
+          onClick={() =>
+            displayExample !== "none"
+              ? setdisplayExample("none")
+              : setdisplayExample("grid")
+          }
         >
-          Ocultar exemplo
+          {displayExample === "none" ? "Exibir exemplo" : "Ocultar exemplo"}
         </button>
       </Container>
 
