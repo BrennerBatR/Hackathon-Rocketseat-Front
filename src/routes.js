@@ -10,7 +10,7 @@ import ModuleSelect from './pages/ModuleSelect';
 
 export default function Routes() {
     return (
-        <BrowserRouter>
+        <BrowserRouter >
             <Route path="/" exact component={Main}/>
             <Route path="/login" component={Login}/>
             <Route path="/studentsRegister" component={StudentRegister}/>

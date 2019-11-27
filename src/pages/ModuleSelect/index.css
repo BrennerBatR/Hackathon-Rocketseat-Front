@@ -12,24 +12,30 @@
     flex-direction: column; /* todos elementos ficam em coluna */
 }
 
-.login-container div img {
-    padding-bottom: 20px;
+.login-container > div > h2 {
+  font-size: 16px;
+  text-transform: uppercase;
 }
 
 .login-container form label {
-    display: flex;
-    flex-direction: column;
-    padding-top: 15px;
+  margin-bottom: 30px;
+  text-transform: uppercase;
+
+  display: flex;
+  flex-direction: column;
 }
 
 .login-container form select {
+    height: 48px;
+    font-size: 16px;
+    padding-left: 6px;
+    border: 1px solid #ddd;
+
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
     background: #eeeeee url(http://www.webcis.com.br/images/imagens-noticias/select/ico-seta-appearance.gif) no-repeat right;
-    height: 48px;
-    border: 1px solid #ddd;
-    padding-left: 6px;
+   
 }
 
 .login-container form select:last-child {
