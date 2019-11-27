@@ -1,0 +1,123 @@
+.example-container {
+  margin-top: 50px;
+  height: 100%;
+  display: flex;
+  justify-content: center; /* alinha horizontalmente ao centro */
+  align-items: center; /* alinha verticalmente ao centro */
+}
+
+.example-container form {
+  width: 100%; /* Se ele lgar numa tela menor q 300px, o width vai ser ocupado em 100% da tela, isso pra responsividade */
+  max-width: 1000px;
+  display: flex;
+  flex-direction: column; /* todos elementos ficam em coluna */
+}
+
+.example-container form textarea {
+  margin-top: 20px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  min-height: 100px;
+  max-height: 500px;
+  padding: 0 20px; /* horizontal = 20px */
+  font-size: 16px;
+  min-width: 500px;
+  max-width: 500px;
+  color: #666;
+}
+
+.example-container form textarea::placeholder {
+  color: #999;
+}
+
+.example-container form button {
+  margin-top: 10px;
+  border: 0;
+  border-radius: 4px;
+  height: 48px;
+  font-size: 16px;
+  background: #df4723;
+  font-weight: bold;
+  color: #fff;
+  cursor: pointer;
+}
+
+.example-container p {
+  text-align: left;
+  max-width: 500px;
+  display: flex;
+  flex-direction: column;
+}
+
+.quest-container {
+  margin-top: 50px;
+  height: 100%;
+  display: flex;
+  justify-content: center; /* alinha horizontalmente ao centro */
+  align-items: center; /* alinha verticalmente ao centro */
+}
+
+.quest-container form {
+  width: 100%; /* Se ele lgar numa tela menor q 300px, o width vai ser ocupado em 100% da tela, isso pra responsividade */
+  max-width: 1000px;
+  display: flex;
+  flex-direction: column; /* todos elementos ficam em coluna */
+}
+
+.quest-container form textarea {
+  margin-top: 20px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  min-height: 100px;
+  max-height: 500px;
+  padding: 0 20px; /* horizontal = 20px */
+  font-size: 16px;
+  min-width: 500px;
+  max-width: 500px;
+  color: #666;
+}
+
+.quest-container form textarea::placeholder {
+  color: #999;
+}
+
+.quest-container form button {
+  margin-top: 10px;
+  border: 0;
+  border-radius: 4px;
+  height: 48px;
+  font-size: 16px;
+  background: #df4723;
+  font-weight: bold;
+  color: #fff;
+  cursor: pointer;
+}
+
+.quest-container p {
+  text-align: left;
+  max-width: 500px;
+  display: flex;
+  flex-direction: column;
+}
+
+.answers {
+  margin-left: auto;
+  color: black;
+  font-size: 20px;
+  font-weight: 900;
+}
+#aux {
+  justify-content: center;
+  align-items: center;
+}
+#sendQuest {
+  width: 100px;
+  border: 0;
+  border-radius: 4px;
+  height: 18px;
+  font-size: 10px;
+  background: #df4723;
+  font-weight: bold;
+  color: #fff;
+  cursor: pointer;
+}
