@@ -1,9 +1,12 @@
 import React, { Component } from "react";
-import "./Quest.css";
-import api from "../../services/api";
+import { Container } from "@material-ui/core";
+import { Spinner2 } from "styled-icons/evil/Spinner2";
 
 import Menu from "../../components/menu";
-import { Container } from "@material-ui/core";
+
+import api from "../../services/api";
+
+import "./index.css";
 
 export default class Quest extends Component {
   state = {
@@ -15,18 +18,23 @@ export default class Quest extends Component {
     user: "5ddd7a0ca0920b0017c58597",
     questId: "",
     semQuest: false,
-    answerColor: "black"
+    answerColor: "black",
+    loading: false
   };
 
   async componentDidMount() {
     this.loadQuest();
   }
+
   loadQuest = async () => {
     const response = await api.get("/quests/all");
     const items = response.data;
     this.setState({ quests: items });
   };
+
   func = async e => {
+    this.setState({ loading: true });
+
     e.preventDefault();
     var resp = undefined;
     try {
@@ -40,12 +48,14 @@ export default class Quest extends Component {
         quest: quests[i]._id,
         correct
       };
+
       const response = await api.post("/userQuests", answerData);
+ 
       if (correct) {
         this.setState({ answerColor: "green" }, () => {
           document.getElementById("answer").innerHTML = answer;
           setTimeout(() => {
-            if (quests[i + 1] != undefined) this.setState({ i: i + 1 });
+            if (quests[i + 1] !== undefined) this.setState({ i: i + 1 });
             else {
               this.setState({ semQuest: true });
             }
@@ -58,16 +68,18 @@ export default class Quest extends Component {
       }
     } catch (e) {
       resp = e;
-      document.getElementById("answer").innerHTML = resp;
+      document.getElementById("answer").innerHTML = "VALOR INVALIDO";
     }
-    //  document.getElementById("answer").innerHTML = resp;
+
+    this.setState({ loading: false });
   };
 
   handleChange(event) {
     this.setState({ exp: event.target.value });
   }
+
   render() {
-    var { quests, i, semQuest, answerColor } = this.state;
+    var { quests, i, semQuest, answerColor, displayExample } = this.state;
     return (
       <div>
         <Menu />
@@ -81,22 +93,29 @@ export default class Quest extends Component {
           className="example-container"
         >
           <div>
-            <h3>
-              <b>Exemplo 1:</b>Qual a área de uma circunferência de raio 2 ?
-            </h3>
+            <div className="container-quest">
+              <span className="title-quest">Exemplo 1:</span>
+              <span className="text-quest">
+                Qual a área de uma circunferência de raio 2 ?
+              </span>
+            </div>
+
             <form>
               <textarea
                 disabled
-                style={{ resize: "none" }}
                 type="text"
                 placeholder="Expressao"
+                style={{ resize: "none" }}
                 value={`const raio = 2; \nconst pi = 3.14;\nconst area = 2*pi*Math.pow(raio,2)\narea `}
-              ></textarea>
+              />
             </form>
-            <p className="answers" id="ex1">
-              Resposta: 25.12
-            </p>
-            <p id="tutorial1">
+
+            <div className="container-answers">
+              <span>resposta</span>
+              <small>25.12</small>
+            </div>
+
+            <p className="tutorial">
               Nesse exemplo, declaramos 3 variáveis: raio, pi , e area. Onde o
               raio recebeu o valor do enunciado, pi consideramos um valor
               aproximado de 3.14 e a área é o resultado esperado na pergunta.
@@ -105,17 +124,24 @@ export default class Quest extends Component {
             </p>
           </div>
         </Container>
+
         <Container className="example-container">
           <button
             id="sendQuest"
-            style={{ textAlign: "center" }}
+            style={{
+              padding: 5,
+              height: 35,
+              textAlign: "center",
+              textTransform: "uppercase",
+              background: displayExample && "#adadad"
+            }}
             onClick={() =>
-              this.state.displayExample && this.state.displayExample !== "none"
+              displayExample && displayExample !== "none"
                 ? this.setState({ displayExample: "none" })
                 : this.setState({ displayExample: "grid" })
             }
           >
-            {!this.state.displayExample || this.state.displayExample === "none"
+            {!displayExample || displayExample === "none"
               ? "Exibir exemplo"
               : "Ocultar exemplo"}
           </button>
@@ -124,11 +150,16 @@ export default class Quest extends Component {
         <Container className="quest-container">
           <div style={{ display: semQuest ? "none" : "block" }}>
             <p></p>
-            <h3>
-              {quests.length > 0
-                ? `Questão ${i + 1}: ` + quests[i].question
-                : ""}
-            </h3>
+
+            <div className="container-quest">
+              <span className="title-quest">
+                {quests.length > 0 && `Questão ${i + 1}: `}
+              </span>
+              <span className="text-quest">
+                {quests.length > 0 && quests[i].question}
+              </span>
+            </div>
+
             <form onSubmit={this.func}>
               <textarea
                 style={{ resize: "none" }}
@@ -137,14 +168,24 @@ export default class Quest extends Component {
                 value={this.state.exp}
                 onChange={this.handleChange.bind(this)}
               ></textarea>
-              <button type="submit">Enviar</button>
+
+              <button type="submit">
+                {this.state.loading ? (
+                  <Spinner2 style={{ color: "#FFF", width: 45 }} />
+                ) : (
+                  "Enviar"
+                )}
+              </button>
             </form>
-            <p
-              className="answers"
-              id="answer"
-              style={{ color: answerColor }}
-            ></p>
+            <div className="box-resp">
+              <p
+                className="answers"
+                id="answer"
+                style={{ color: answerColor }}
+              />
+            </div>
           </div>
+
           <div style={{ display: !semQuest ? "none" : "block" }}>
             Nenhuma pergunta para essa matéria disponível.
           </div>

@@ -14,13 +14,16 @@
 }
 
 .example-container form textarea {
-  margin-top: 20px;
+  margin: 20px;
+  padding: 10px;
+  margin: 20px;
+  font-size: 16px;
+
   border: 1px solid #ddd;
-  border-radius: 4px;
+  border-radius: 5px;
   min-height: 100px;
   max-height: 500px;
-  padding: 0 20px; /* horizontal = 20px */
-  font-size: 16px;
+
   min-width: 500px;
   max-width: 500px;
   color: #666;
@@ -65,12 +68,12 @@
 }
 
 .quest-container form textarea {
+  padding: 20px;
   margin-top: 20px;
   border: 1px solid #ddd;
   border-radius: 4px;
   min-height: 100px;
   max-height: 500px;
-  padding: 0 20px; /* horizontal = 20px */
   font-size: 16px;
   min-width: 500px;
   max-width: 500px;
@@ -82,7 +85,7 @@
 }
 
 .quest-container form button {
-  margin-top: 10px;
+  margin-top: 20px;
   border: 0;
   border-radius: 4px;
   height: 48px;
@@ -91,6 +94,7 @@
   font-weight: bold;
   color: #fff;
   cursor: pointer;
+  text-transform: uppercase;
 }
 
 .quest-container p {
@@ -100,12 +104,6 @@
   flex-direction: column;
 }
 
-.answers {
-  margin-left: auto;
-  color: black;
-  font-size: 20px;
-  font-weight: 900;
-}
 #aux {
   justify-content: center;
   align-items: center;
@@ -120,4 +118,70 @@
   font-weight: bold;
   color: #fff;
   cursor: pointer;
+}
+
+/* Container Quest */
+div.container-quest {
+  display: flex;
+  flex-direction: column;
+}
+
+.container-quest > span.title-quest {
+  display: block;
+  margin-bottom: 20px;
+
+  color: #000;
+  font-size: 18px;
+  text-transform: uppercase;
+}
+
+.container-quest > span.text-quest {
+  background: aliceblue;
+  padding: 10px;
+  border-radius: 10px;
+}
+
+/* Container Aswers */
+div.container-answers {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  margin-bottom: 20px;
+}
+
+div.container-answers > small {
+  display: block;
+  margin-left: 20px;
+  background: aliceblue;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid green;
+}
+
+div.container-answers > span {
+  display: block;
+  color: #000;
+  font-size: 18px;
+  text-transform: uppercase;
+}
+
+/* Tutorial */
+
+p.tutorial {
+  background: #fff;
+  font-size: 16px;
+  line-height: 1.7;
+  letter-spacing: 2px;
+  text-align: justify;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+/* Box Resposta */
+div.box-resp {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  margin-top: 30px;
 }
