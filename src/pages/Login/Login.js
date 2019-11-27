@@ -1,40 +1,75 @@
-import React, { useState } from 'react';
-import './Login.css';
+import React, {Component} from 'react';
+import Menu from '../../components/menu';
+import Button from "@material-ui/core/Button";
+import {Link, Redirect} from 'react-router-dom';
+
 
 import api from '../../services/api';
 
 import logo from '../../assets/logo.png';
 
-import Menu from '../../components/menu';
+import './Login.css';
 
-export default function Login({ history }) { //export exporta assim q ele for renderizado
-    const [username, setUsername] = useState('');
+export default class ModuleSelect extends Component {
+  state = {
+    email: 'brenner.batista.dev@gmail.com',
+    password: '123456',
+  };
 
-    async function handleSubmit(e) {
-        e.preventDefault(); //o padrao de um submit é redirecionar apra outra pagina, com o preventdefault estou prevenindo o padrao q é esse redirecionamento
+  login = async (e) => {
+    e.preventDefault();
+    
+    const response = await api.post(`/auth/authenticate`, this.state);
+    const data = response.data;
 
-        const response = await api.post('/devs', { //aqu é body
-            username,
-        }); //o inicio da rota foi definida dentro do service api
-
-        const { _id } = response.data.dev;
-        history.push(`/dev/${_id}`); //o hisotry é ehrdado do REACT DOM, fazer redirecionamento de paginas é assim
+    if(data.user._id) {
+      localStorage.setItem('id_', data.user._id);
+      window.location.href = "/moduleSelect";
     }
+  };
+
+  setPassword = (e) => {
+    const password = e.target.value;
+
+    this.setState({password});
+  };
+
+  setEmail = (e) => {
+    const email = e.target.value;
+
+    this.setState({email});
+  };
+
+  render() {
+    const {email, password} = this.state;
 
     return (
+      <div>
+        <Menu/>
         <div>
-            <Menu />
-        <div className="login-container">
-            <form onSubmit={handleSubmit}>
-                <img src={logo} alt="Tindev"></img>
+          <Menu/>
+          <div className="login-container">
+            <form onSubmit={this.login}>
+              <img src={logo} alt="Tindev"></img>
+              <label>Email
                 <input
-                    placeholder="Digite seu usuário do Github"
-                    value={username}
-                    onChange={e => setUsername(e.target.value)} //pegando o valor digitado
+                  value={email}
+                  onChange={this.setEmail} //pegando o valor digitado
                 />
-                <button type="submit">Enviar</button>
+              </label>
+              <label>Senha
+                <input
+                  type='password'
+                  value={password}
+                  onChange={this.setPassword} //pegando o valor digitado
+                />
+              </label>
+              <Button variant='contained' color='primary' type="submit"
+                      disabled={email.length === 0 || password.length === 0}>Login</Button>
             </form>
+          </div>
         </div>
-        </div>
-    );
+      </div>
+    )
+  };
 }

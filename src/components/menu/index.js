@@ -108,6 +108,11 @@ export default function PersistentDrawerLeft() {
     const handleClick = () => {
         setOpenItem(!openItem);
     };
+    
+    const logout = () => {
+      localStorage.clear();
+      window.location.href = "/";
+    };
 
     return (
         <div className={classes.root}>
@@ -160,10 +165,6 @@ export default function PersistentDrawerLeft() {
                         <ListItemIcon><HomeIcon/></ListItemIcon>
                         <ListItemText primary='Home'/>
                     </ListItem>
-                    <ListItem button key='Matérias' component={Link} to='/'>
-                        <ListItemIcon><AccountTreeIcon/></ListItemIcon>
-                        <ListItemText primary='Matérias'/>
-                    </ListItem>
                     <ListItem button key='Perguntas' component={Link} to='/moduleSelect'>
                         <ListItemIcon><QuestionAnswerIcon/></ListItemIcon>
                         <ListItemText primary='Perguntas'/>
@@ -202,7 +203,7 @@ export default function PersistentDrawerLeft() {
                 <Divider/>
                 <List>
                     {['Sair'].map((text, index) => (
-                        <ListItem button key={text}>
+                        <ListItem button key={text} onClick={logout}>
                             <ListItemIcon>{index % 2 === 0 ? <InboxIcon/> : <MailIcon/>}</ListItemIcon>
                             <ListItemText primary={text}/>
                         </ListItem>
