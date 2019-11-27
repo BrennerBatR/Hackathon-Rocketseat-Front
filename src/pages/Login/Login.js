@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import './Login.css';
 
-import api from '../services/api';
+import api from '../../services/api';
 
-import logo from '../assets/logo.png';
+import logo from '../../assets/logo.png';
 
-import Menu from '../components/menu';
+import Menu from '../../components/menu';
 
 export default function Login({ history }) { //export exporta assim q ele for renderizado
     const [username, setUsername] = useState('');
