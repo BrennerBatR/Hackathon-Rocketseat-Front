@@ -14,7 +14,8 @@ export default class Quest extends Component {
     i: 0,
     user: "5ddd7a0ca0920b0017c58597",
     questId: "",
-    semQuest: false
+    semQuest: false,
+    answerColor: "black"
   };
 
   async componentDidMount() {
@@ -30,19 +31,30 @@ export default class Quest extends Component {
     var resp = undefined;
     try {
       const { quests, i } = this.state;
-      const answer = "Resposta: " + eval(this.state.exp);
-      document.getElementById("answer").innerHTML = answer;
+      const evalValue = eval(this.state.exp);
+      const answer = `Resposta: ${evalValue} `;
+      const correct = evalValue == quests[i].answer ? true : false;
 
       const answerData = {
         user: this.state.user,
         quest: quests[i]._id,
-        correct: answer == quests[i].answer ? true : false
+        correct
       };
       const response = await api.post("/userQuests", answerData);
-      console.log(response.data);
-      if (quests[i + 1] != undefined) this.setState({ i: i + 1 });
-      else {
-        this.setState({ semQuest: true });
+      if (correct) {
+        this.setState({ answerColor: "green" }, () => {
+          document.getElementById("answer").innerHTML = answer;
+          setTimeout(() => {
+            if (quests[i + 1] != undefined) this.setState({ i: i + 1 });
+            else {
+              this.setState({ semQuest: true });
+            }
+          }, 2000);
+        });
+      } else {
+        this.setState({ answerColor: "red" }, () => {
+          document.getElementById("answer").innerHTML = answer;
+        });
       }
     } catch (e) {
       resp = e;
@@ -55,7 +67,7 @@ export default class Quest extends Component {
     this.setState({ exp: event.target.value });
   }
   render() {
-    var { quests, i } = this.state;
+    var { quests, i, semQuest, answerColor } = this.state;
     return (
       <div>
         <Menu />
@@ -89,7 +101,7 @@ export default class Quest extends Component {
               raio recebeu o valor do enunciado, pi consideramos um valor
               aproximado de 3.14 e a área é o resultado esperado na pergunta.
               Note que para imprimir o resultado final, escrevemos a variável
-              isolada na última linha da entrada. A função
+              isolada na última linha da entrada.
             </p>
           </div>
         </Container>
@@ -110,7 +122,8 @@ export default class Quest extends Component {
         </Container>
 
         <Container className="quest-container">
-          <div>
+          <div style={{ display: semQuest ? "none" : "block" }}>
+            <p></p>
             <h3>
               {quests.length > 0
                 ? `Questão ${i + 1}: ` + quests[i].question
@@ -126,7 +139,14 @@ export default class Quest extends Component {
               ></textarea>
               <button type="submit">Enviar</button>
             </form>
-            <p className="answers" id="answer"></p>
+            <p
+              className="answers"
+              id="answer"
+              style={{ color: answerColor }}
+            ></p>
+          </div>
+          <div style={{ display: !semQuest ? "none" : "block" }}>
+            Nenhuma pergunta para essa matéria disponível.
           </div>
         </Container>
       </div>
