@@ -8,7 +8,7 @@ import api from '../../services/api';
 import logo from '../../assets/logo.png';
 
 export default function Login({history}) { //export exporta assim q ele for renderizado
-    const [username, setUsername] = useState('');
+    const [username] = useState('');
 
     async function handleSubmit(e) {
         e.preventDefault(); //o padrao de um submit é redirecionar apra outra pagina, com o preventdefault estou prevenindo o padrao q é esse redirecionamento
