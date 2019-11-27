@@ -19,7 +19,8 @@ export default class Quest extends Component {
     questId: "",
     semQuest: false,
     answerColor: "black",
-    loading: false
+    loading: false,
+    moduleID: ""
   };
 
   async componentDidMount() {
@@ -27,7 +28,9 @@ export default class Quest extends Component {
   }
 
   loadQuest = async () => {
-    const response = await api.get("/quests/all");
+    const id = this.props.location.pathname;
+    const aux = id.split("/");
+    const response = await api.get(`/quests/module/${aux[2]}`);
     const items = response.data;
     this.setState({ quests: items });
   };
@@ -50,7 +53,7 @@ export default class Quest extends Component {
       };
 
       const response = await api.post("/userQuests", answerData);
- 
+
       if (correct) {
         this.setState({ answerColor: "green" }, () => {
           document.getElementById("answer").innerHTML = answer;
