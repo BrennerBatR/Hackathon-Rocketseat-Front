@@ -1,12 +1,12 @@
 import React, { Component } from "react";
 import Button from "@material-ui/core/Button";
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 import "../homePage/homePage.css";
 import logo from "../../assets/logo.png";
 
 const homePage = () => (
-  <div>
+  <div id="divHeader">
     <div className="box">
       <img className="logo" src={logo} alt="logo" />
       <h2>
