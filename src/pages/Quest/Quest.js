@@ -10,31 +10,51 @@ export default class Quest extends Component {
     exp: "",
     displayExample: "",
     quests: "",
-    load: ""
+    load: "",
+    i: 0,
+    user: "5ddd7a0ca0920b0017c58597",
+    questId: ""
   };
 
   async componentDidMount() {
-    await this.loadQuest();
+    this.loadQuest();
   }
   loadQuest = async () => {
-    const response = await api.get("/userQuests/all");
-    this.setState({ quests: response.data });
+    const response = await api.get("/quests/all");
+    const items = response.data;
+    this.setState({ quests: items });
   };
   func = async e => {
     e.preventDefault();
     var resp = undefined;
     try {
-      resp = "Resposta: " + eval(this.state.exp);
+      const { quests, i } = this.state;
+      const answer = "Resposta: " + eval(this.state.exp);
+      document.getElementById("answer").innerHTML = answer;
+
+      const answerData = {
+        user: this.state.user,
+        quest: quests[i]._id,
+        correct: answer == quests[i].answer ? true : false
+      };
+      const response = await api.post("/userQuests", answerData);
+      console.log(response.data);
+      if (quests[i + 1] != undefined) this.setState({ i: i + 1 });
+      else {
+        alert("NAO");
+      }
     } catch (e) {
       resp = e;
+      document.getElementById("answer").innerHTML = resp;
     }
-    document.getElementById("answer").innerHTML = resp;
+    //  document.getElementById("answer").innerHTML = resp;
   };
 
   handleChange(event) {
     this.setState({ exp: event.target.value });
   }
   render() {
+    var { quests, i } = this.state;
     return (
       <div>
         <Menu />
@@ -77,7 +97,7 @@ export default class Quest extends Component {
             id="sendQuest"
             style={{ textAlign: "center" }}
             onClick={() =>
-              this.state.displayExample !== "none"
+              this.state.displayExample && this.state.displayExample !== "none"
                 ? this.setState({ displayExample: "none" })
                 : this.setState({ displayExample: "grid" })
             }
@@ -90,7 +110,11 @@ export default class Quest extends Component {
 
         <Container className="quest-container">
           <div>
-            <h3>Pergunta 1 da API?</h3>
+            <h3>
+              {quests.length > 0
+                ? `Questão ${i + 1}: ` + quests[i].question
+                : ""}
+            </h3>
             <form onSubmit={this.func}>
               <textarea
                 style={{ resize: "none" }}
