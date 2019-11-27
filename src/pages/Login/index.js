@@ -1,14 +1,13 @@
 import React, {Component} from 'react';
 import Menu from '../../components/menu';
 import Button from "@material-ui/core/Button";
-import {Link, Redirect} from 'react-router-dom';
 
 
 import api from '../../services/api';
 
 import logo from '../../assets/logo.png';
 
-import './Login.css';
+import './index.css';
 
 export default class ModuleSelect extends Component {
   state = {

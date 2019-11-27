@@ -14,7 +14,6 @@ import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import MailIcon from '@material-ui/icons/Mail';
 import QuestionAnswerIcon from '@material-ui/icons/QuestionAnswer';
-import AccountTreeIcon from '@material-ui/icons/AccountTree';
 import AssignmentIcon from '@material-ui/icons/Assignment';
 import HomeIcon from '@material-ui/icons/Home';
 import ListSubheader from '@material-ui/core/ListSubheader';
@@ -195,6 +194,12 @@ export default function PersistentDrawerLeft() {
                                     <AddIcon/>
                                 </ListItemIcon>
                                 <ListItemText primary="Matéria"/>
+                            </ListItem>
+                            <ListItem button className={classes.nested} component={Link} to='/questions/new'>
+                                <ListItemIcon>
+                                    <AddIcon/>
+                                </ListItemIcon>
+                                <ListItemText primary="Pergunta"/>
                             </ListItem>
                         </List>
                     </Collapse>

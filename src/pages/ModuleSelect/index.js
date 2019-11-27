@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 import Menu from '../../components/menu';
 import Button from "@material-ui/core/Button";
 import {Link} from 'react-router-dom';
-import {makeStyles, useTheme} from '@material-ui/core/styles';
 
 
 import api from '../../services/api';
@@ -10,16 +9,6 @@ import api from '../../services/api';
 import logo from '../../assets/logo.png';
 
 import './index.css';
-
-const useStyles = makeStyles(theme => ({
-    button: {
-        background: '#0098d7',
-        transition: theme.transitions.create(['margin', 'width'], {
-            easing: theme.transitions.easing.sharp,
-            duration: theme.transitions.duration.leavingScreen,
-        }),
-    },
-}));
 
 export default class ModuleSelect extends Component {
     state = {
