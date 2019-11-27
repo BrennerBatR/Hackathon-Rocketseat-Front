@@ -14,7 +14,6 @@ import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import MailIcon from '@material-ui/icons/Mail';
 import QuestionAnswerIcon from '@material-ui/icons/QuestionAnswer';
-import AccountTreeIcon from '@material-ui/icons/AccountTree';
 import AssignmentIcon from '@material-ui/icons/Assignment';
 import HomeIcon from '@material-ui/icons/Home';
 import ListSubheader from '@material-ui/core/ListSubheader';
@@ -108,6 +107,11 @@ export default function PersistentDrawerLeft() {
     const handleClick = () => {
         setOpenItem(!openItem);
     };
+    
+    const logout = () => {
+      localStorage.clear();
+      window.location.href = "/";
+    };
 
     return (
         <div className={classes.root}>
@@ -160,10 +164,6 @@ export default function PersistentDrawerLeft() {
                         <ListItemIcon><HomeIcon/></ListItemIcon>
                         <ListItemText primary='Home'/>
                     </ListItem>
-                    <ListItem button key='Matérias' component={Link} to='/'>
-                        <ListItemIcon><AccountTreeIcon/></ListItemIcon>
-                        <ListItemText primary='Matérias'/>
-                    </ListItem>
                     <ListItem button key='Perguntas' component={Link} to='/moduleSelect'>
                         <ListItemIcon><QuestionAnswerIcon/></ListItemIcon>
                         <ListItemText primary='Perguntas'/>
@@ -195,6 +195,12 @@ export default function PersistentDrawerLeft() {
                                 </ListItemIcon>
                                 <ListItemText primary="Matéria"/>
                             </ListItem>
+                            <ListItem button className={classes.nested} component={Link} to='/questions/new'>
+                                <ListItemIcon>
+                                    <AddIcon/>
+                                </ListItemIcon>
+                                <ListItemText primary="Pergunta"/>
+                            </ListItem>
                         </List>
                     </Collapse>
                     {/*))}*/}
@@ -202,7 +208,7 @@ export default function PersistentDrawerLeft() {
                 <Divider/>
                 <List>
                     {['Sair'].map((text, index) => (
-                        <ListItem button key={text}>
+                        <ListItem button key={text} onClick={logout}>
                             <ListItemIcon>{index % 2 === 0 ? <InboxIcon/> : <MailIcon/>}</ListItemIcon>
                             <ListItemText primary={text}/>
                         </ListItem>
