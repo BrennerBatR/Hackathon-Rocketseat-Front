@@ -22,9 +22,7 @@ export default function Login({ history }) {
     const { _id } = response.data.dev;
     history.push(`/dev/${_id}`); //o hisotry é ehrdado do REACT DOM, fazer redirecionamento de paginas é assim
   } */
-  function hidden(disp) {
-    document.getElementById("example").style.display = disp;
-  }
+
   async function func(e) {
     e.preventDefault();
     var resp = undefined;
@@ -68,13 +66,16 @@ export default function Login({ history }) {
             que para imprimir o resultado final, escrevemos a variável isolada
             na última linha da entrada. A função
           </p>
-          <button
-            style={{ textAlign: "center" }}
-            onClick={() => setdisplayExample("none")}
-          >
-            Ocultar exemplo
-          </button>
         </div>
+      </Container>
+      <Container className="example-container">
+        <button
+          id="sendQuest"
+          style={{ textAlign: "center" }}
+          onClick={() => setdisplayExample("none")}
+        >
+          Ocultar exemplo
+        </button>
       </Container>
 
       <Container className="quest-container">
