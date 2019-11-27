@@ -140,7 +140,7 @@ export default class QuestionRegister extends Component {
                 <input type='text'
                        onChange={this.setAnswer}/>
               </label>
-              <label>
+             {/*  <label>
                 Exemplo
                 <Checkbox
                   checked={this.state.example}
@@ -151,7 +151,7 @@ export default class QuestionRegister extends Component {
                     'aria-label': 'secondary checkbox',
                   }}
                 />
-              </label>
+              </label> */}
               <Button variant='contained' color='primary' type="submit"
                 // disabled={email.length === 0 || password.length === 0}
               >Login</Button>

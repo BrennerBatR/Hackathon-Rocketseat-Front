@@ -1,12 +1,12 @@
 import React, { Component } from "react";
 import Button from "@material-ui/core/Button";
-import {Link} from 'react-router-dom';
+import { Link } from "react-router-dom";
 
 import "../homePage/homePage.css";
 import logo from "../../assets/logo.png";
 
 const homePage = () => (
-  <div>
+  <div id="divHeader">
     <div className="box">
       <img className="logo" src={logo} alt="logo" />
       <h2>
@@ -16,10 +16,10 @@ const homePage = () => (
       </h2>
       <h2>
         Tenha um diferencial das outras escolas, mostre melhorias de resultados
-        e crie pessoal prontas para o futuro…
+        e crie pessoas prontas para o futuro…
         <br />
-        Se destaquem entre as escolas, mostre resultados aos pais, tenham dados
-        de alunos e controle sobre o que eles fazem
+        Se destaque entre as escolas, mostre resultados aos pais, tenha dados
+        de alunos e controle sobre o que eles fazem!
       </h2>
       <div className="button">
         <Button
