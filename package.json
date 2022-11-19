@@ -13,7 +13,7 @@
     "react-highlight.js": "^1.0.7",
     "react-navigation": "^4.0.10",
     "react-router-dom": "^5.0.1",
-    "react-scripts": "3.1.1",
+    "react-scripts": "5.0.1",
     "socket.io-client": "^2.2.0",
     "styled-components": "^4.4.1",
     "styled-icons": "^9.0.1"
